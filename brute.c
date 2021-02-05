@@ -5,9 +5,14 @@
 #include <unistd.h>
 #include <limits.h>
 #include <pthread.h>
-#include <sys/sysinfo.h>
-
+#ifdef __linux__
+    #include <sys/sysinfo.h>
+#endif
 #include "md5.h"
+
+#ifndef HOST_NAME_MAX
+    #define HOST_NAME_MAX 32
+#endif
 
 volatile int best_prefix = 5;
 volatile int best_suffix = 5;
@@ -56,13 +61,13 @@ void* brute(void* thread_id) {
 
 int main() {
     srand(time(0));
-    int cpu_count = get_nprocs();
-    printf("[%s->INFO] Running on %d threads\n", get_hostname(), cpu_count);
-    pthread_t threads[cpu_count];
-    for (intptr_t i = 0; i < cpu_count; i++) {
+    const int CPU_COUNT = get_nprocs();
+    printf("[%s->INFO] Running on %d threads\n", get_hostname(), CPU_COUNT);
+    pthread_t threads[CPU_COUNT];
+    for (intptr_t i = 0; i < CPU_COUNT; i++) {
         pthread_create(threads + i, NULL, brute, (void*)i);
     }
-    for (intptr_t i = 0; i < cpu_count; i++) {
+    for (intptr_t i = 0; i < CPU_COUNT; i++) {
         pthread_join(threads[i], NULL);
     }
     return 0;
