@@ -29,7 +29,8 @@ void* brute(void* thread_id) {
                 break;
             }
         }
-        for (int i = len; i > 0; i--){
+        // TODO: Broken??
+        for (int i = len-1; i > 0; i--){
             if (old_buffer[i] != buffer[i]) {
                 if (len-i > best_suffix) {
                     printf("[%ld] new best suffix match: %d characters\n", (intptr_t)thread_id, len-i);
