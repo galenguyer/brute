@@ -52,10 +52,10 @@ int main() {
     printf("[INFO] Running on %d threads\n", cpu_count);
     pthread_t threads[cpu_count];
     for (intptr_t i = 0; i < cpu_count; i++) {
-        pthread_create(&threads[i], NULL, brute, (void*)i);
+        pthread_create(threads + i, NULL, brute, (void*)i);
     }
     for (intptr_t i = 0; i < cpu_count; i++) {
-        pthread_join(&threads[i], NULL);
+        pthread_join(threads[i], NULL);
     }
     return 0;
 }
