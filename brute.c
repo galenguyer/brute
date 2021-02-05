@@ -33,7 +33,7 @@ void* brute(void* thread_id) {
         for (int i = len-1; i > 0; i--){
             if (old_buffer[i] != buffer[i]) {
                 if (len-i > best_suffix) {
-                    printf("[%ld] new best suffix match: %d characters\n", (intptr_t)thread_id, len-i);
+                    printf("[%ld] new best suffix match: %d characters\n", (intptr_t)thread_id, len-i-1);
                     printf("[%ld] %s -> %s\n", (intptr_t)thread_id, old_buffer, buffer);
                     best_suffix = len-i;
                 }
