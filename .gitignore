@@ -36,6 +36,7 @@
 *.x86_64
 *.hex
 brute
+bench
 
 # Debug files
 *.dSYM/
@@ -51,3 +52,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+.vscode/
