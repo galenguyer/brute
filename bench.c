@@ -44,6 +44,8 @@ int main() {
     printf("[bench->INFO] Single threaded test took %lds%ldms\n", 
         (st_end.tv_sec - st_start.tv_sec),
         (((st_end.tv_sec*1000000+st_end.tv_usec)-(st_start.tv_sec*1000000+st_start.tv_usec))/1000)%1000);
+    long int st_diff_ms = (((st_end.tv_sec*1000000+st_end.tv_usec)-(st_start.tv_sec*1000000+st_start.tv_usec))/1000);
+    printf("[bench->INFO] Single threaded rate: %0.2fMh/s\n", 10000000/(float)st_diff_ms);
 
     printf("[bench->INFO] Running on %d threads\n", CPU_COUNT);
     struct timeval mt_start, mt_end;
@@ -60,5 +62,8 @@ int main() {
         (mt_end.tv_sec - mt_start.tv_sec),
         (((mt_end.tv_sec*1000000+mt_end.tv_usec)-(mt_start.tv_sec*1000000+mt_start.tv_usec))/1000)%1000);
 
+    long int mt_diff_ms = (((mt_end.tv_sec*1000000+mt_end.tv_usec)-(mt_start.tv_sec*1000000+mt_start.tv_usec))/1000);
+    printf("[bench->INFO] Multithreaded rate: %0.2fMh/s\n", 10000000/(float)mt_diff_ms);
+    
     return 0;
 }
